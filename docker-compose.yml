@@ -1,0 +1,25 @@
+version: "3"
+services:
+  app:
+    container_name: springboot-postgresql
+    image: springboot-postgresql
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgresqldb
+    environment:
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_DATABASE: documDb,
+      DB_HOST: postgresqldb
+
+  postgresqldb:
+    image: postgres:latest
+    volumes:
+        - /path/to/postgresql-persistence:/bitnami/postgresql
+    ports:
+        - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=documDb
